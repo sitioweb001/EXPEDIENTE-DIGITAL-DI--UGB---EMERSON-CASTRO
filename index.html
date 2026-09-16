@@ -14,18 +14,20 @@
      Twitter/X, Discord, etc. para mostrar el logo y una
      descripción cuando alguien comparte el enlace del sitio.
 
-     "og:image" y "twitter:image" están en ruta relativa para que
-     funcionen apenas subas la carpeta. Si publicas el sitio con
-     GitHub Pages, se recomienda reemplazarlas por la URL completa,
-     por ejemplo:
-     https://tu-usuario.github.io/tu-repositorio/logos/social-preview.png
+     WhatsApp (a diferencia de Instagram) exige URL absoluta para
+     "og:image"/"twitter:image" — con ruta relativa falla en
+     silencio y solo muestra texto. Por eso aquí ya va la URL
+     completa del sitio publicado en GitHub Pages.
      ========================================================= -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Dirección de Integración">
 <meta property="og:locale" content="es_SV">
+<meta property="og:url" content="https://sitioweb001.github.io/EXPEDIENTE-DIGITAL-DI--UGB---EMERSON-CASTRO/">
 <meta property="og:title" content="Expediente Digital del Becario · Dirección de Integración">
 <meta property="og:description" content="Expediente digital del becario para la Dirección de Integración (UGB) — Programa de Continuidad Académica y Técnica. Datos del becario, carnet y documentos oficiales en PDF.">
-<meta property="og:image" content="logos/social-preview.png">
+<meta property="og:image" content="https://sitioweb001.github.io/EXPEDIENTE-DIGITAL-DI--UGB---EMERSON-CASTRO/logos/social-preview.png">
+<meta property="og:image:secure_url" content="https://sitioweb001.github.io/EXPEDIENTE-DIGITAL-DI--UGB---EMERSON-CASTRO/logos/social-preview.png">
+<meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1280">
 <meta property="og:image:height" content="640">
 <meta property="og:image:alt" content="Logo de la Dirección de Integración — Expediente Digital del Becario">
@@ -33,7 +35,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Expediente Digital del Becario · Dirección de Integración">
 <meta name="twitter:description" content="Expediente digital del becario — Dirección de Integración (UGB). Datos del becario, carnet y documentos oficiales en PDF.">
-<meta name="twitter:image" content="logos/social-preview.png">
+<meta name="twitter:image" content="https://sitioweb001.github.io/EXPEDIENTE-DIGITAL-DI--UGB---EMERSON-CASTRO/logos/social-preview.png">
 <link rel="icon" href="logos/DI.svg" type="image/svg+xml">
 <style>
 /* =============================================================
@@ -257,6 +259,97 @@ button{ font-family: inherit; cursor: pointer; }
   box-shadow: var(--shadow-card);
 }
 .toggle-icon{ font-size: 1.1em; }
+
+/* =============================================================
+   PANTALLA DE INICIO — menú con los 3 accesos principales
+   ============================================================= */
+
+.menu-inicio{
+  max-width: 900px;
+  margin: clamp(1.5rem, 4vw, 3rem) auto;
+  padding: 0 clamp(1rem, 3vw, 1.75rem);
+  text-align: center;
+}
+.menu-inicio-titulo{
+  font-size: clamp(1.15rem, 2vw, 1.35rem);
+  color: var(--color-ink);
+  margin-bottom: .4rem;
+}
+.menu-inicio-desc{
+  font-size: .95rem;
+  color: var(--color-ink-soft);
+  max-width: 46ch;
+  margin: 0 auto 2rem;
+}
+
+.menu-botones{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.menu-boton{
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: 1.85rem 1.5rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  color: var(--color-ink);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  flex: 0 1 260px;
+  max-width: 300px;
+}
+.menu-boton:hover, .menu-boton:focus-visible{
+  transform: translateY(-3px);
+  box-shadow: 0 16px 30px -12px rgba(12,27,51,.2);
+  border-color: var(--color-primary-dark);
+}
+.menu-boton-icono{
+  font-size: 1.9rem;
+  line-height: 1;
+}
+.menu-boton-titulo{
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 1.08rem;
+}
+.menu-boton-desc{
+  font-size: .84rem;
+  color: var(--color-ink-soft);
+}
+
+/* Barra "Volver al menú" mostrada dentro de cada vista */
+.volver-bar{
+  max-width: 1320px;
+  margin: 1.25rem auto 0;
+  padding: 0 clamp(1rem, 3vw, 1.75rem);
+}
+.btn-volver-menu{
+  display: inline-flex;
+  align-items: center;
+  gap: .5em;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-ink);
+  padding: .55em 1em;
+  border-radius: 8px;
+  font-size: .85rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-card);
+}
+.btn-volver-menu:hover{ background: var(--color-primary-soft); border-color: var(--color-primary); }
+
+/* Cuando el panel lateral no aplica a la vista actual (ej. "Ver datos
+   del becario"), la columna principal ocupa todo el ancho disponible. */
+.app-shell.vista-sin-sidebar{
+  grid-template-columns: minmax(0, 1fr) !important;
+}
 
 /* =============================================================
    ESTRUCTURA PRINCIPAL — panel lateral + contenido
@@ -871,7 +964,7 @@ button{ font-family: inherit; cursor: pointer; }
   justify-content: center;
   gap: 1rem;
 }
-.footer-logo{ height: clamp(60px, 13vw, 50px); width: auto; opacity: .85; }
+.footer-logo{ height: clamp(70px, 8vw, 40px); width: auto; opacity: .99.9; }
 .footer-logo-ugb{ padding-left: 1rem; border-left: 1px solid var(--color-border); }
 .footer-texto p{ margin: 0; font-size: .82rem; }
 .footer-note{ color: var(--color-ink-faint) !important; margin-top: .2rem !important; }
@@ -974,13 +1067,45 @@ button{ font-family: inherit; cursor: pointer; }
   </div>
 </header>
 
+<!-- =========================================================
+     PANTALLA DE INICIO — menú principal con los 3 accesos
+     ========================================================= -->
+<section class="menu-inicio" id="menu-inicio">
+  <h2 class="menu-inicio-titulo">¿Qué deseas consultar?</h2>
+  <p class="menu-inicio-desc">Elige una opción para ver el expediente digital del becario.</p>
+  <div class="menu-botones">
+    <button class="menu-boton" type="button" data-vista="todo">
+      <span class="menu-boton-icono" aria-hidden="true">🗂️</span>
+      <span class="menu-boton-titulo">Ver todo</span>
+      <span class="menu-boton-desc">Resumen del expediente, documentos, datos del becario, responsables y carnet.</span>
+    </button>
+    <button class="menu-boton" type="button" data-vista="documentos">
+      <span class="menu-boton-icono" aria-hidden="true">📄</span>
+      <span class="menu-boton-titulo">Ver documentos</span>
+      <span class="menu-boton-desc">Lista de documentos PDF e imágenes, con filtro de búsqueda y visualizador.</span>
+    </button>
+    <button class="menu-boton" type="button" data-vista="datos">
+      <span class="menu-boton-icono" aria-hidden="true">🧑‍🎓</span>
+      <span class="menu-boton-titulo">Ver datos del becario</span>
+      <span class="menu-boton-desc">Datos personales, responsables de contacto y carnet del becario.</span>
+    </button>
+  </div>
+</section>
+
+<!-- Barra para volver a la pantalla de menú desde cualquier vista -->
+<div class="volver-bar" id="volver-bar" hidden>
+  <button class="btn-volver-menu" id="btn-volver-menu" type="button">
+    <span aria-hidden="true">←</span> Volver al menú
+  </button>
+</div>
+
 <!-- Botón flotante para mostrar/ocultar el panel de documentos en pantallas pequeñas -->
-<button id="toggle-sidebar" class="sidebar-toggle" aria-expanded="true" aria-controls="sidebar">
+<button id="toggle-sidebar" class="sidebar-toggle" aria-expanded="true" aria-controls="sidebar" hidden>
   <span class="toggle-icon" aria-hidden="true">☰</span>
   <span>Documentos del expediente</span>
 </button>
 
-<div class="app-shell">
+<div class="app-shell" hidden>
 
   <!-- =========================================================
        PANEL LATERAL — Resumen, búsqueda y listado de documentos
@@ -1066,7 +1191,7 @@ button{ font-family: inherit; cursor: pointer; }
         </figure>
 
       </div>
-      <p class="carnet-ayuda"></code>  Haz clic sobre una imagen para ampliarla.</p>
+      <p class="carnet-ayuda"/</code> Haz clic sobre una imagen para ampliarla.</p>
     </section>
 
     <!-- 6. VISUALIZADOR DE DOCUMENTOS -->
@@ -1252,6 +1377,8 @@ const documentos = [
   }
 ];
 
+
+
 /* =========================================================
    AQUÍ DESCOMENTA O AGREGA NUEVOS DOCUMENTOS
    =========================================================
@@ -1354,7 +1481,15 @@ const documentos = [
     carnetFrenteBtn: document.getElementById("carnet-frente-btn"),
     carnetReversoBtn: document.getElementById("carnet-reverso-btn"),
     carnetFrenteImg: document.getElementById("carnet-frente-img"),
-    carnetReversoImg: document.getElementById("carnet-reverso-img")
+    carnetReversoImg: document.getElementById("carnet-reverso-img"),
+    menuInicio: document.getElementById("menu-inicio"),
+    menuBotones: document.querySelectorAll(".menu-boton"),
+    volverBar: document.getElementById("volver-bar"),
+    btnVolverMenu: document.getElementById("btn-volver-menu"),
+    seccionDatosBecario: document.getElementById("datos-becario"),
+    seccionResponsables: document.getElementById("responsables"),
+    seccionCarnet: document.getElementById("carnet"),
+    seccionVisualizador: document.getElementById("visualizador")
   };
 
   /* Estado de la aplicación */
@@ -1362,7 +1497,8 @@ const documentos = [
     documentoActualIndex: -1,
     filtro: "",
     paginaImagenActual: 0,
-    vistaImagenes: "pagina" // "pagina" | "completa"
+    vistaImagenes: "pagina", // "pagina" | "completa"
+    vista: "menu" // "menu" | "todo" | "documentos" | "datos"
   };
 
   /* Límites y clave de almacenamiento para el ancho del panel lateral */
@@ -1868,6 +2004,47 @@ const documentos = [
   }
 
   /* -----------------------------------------------------------
+     Navegación entre la pantalla de menú y las 3 vistas:
+     "todo", "documentos" y "datos"
+     ----------------------------------------------------------- */
+  function mostrarVista(vista) {
+    estado.vista = vista;
+
+    if (vista === "menu") {
+      el.menuInicio.hidden = false;
+      el.volverBar.hidden = true;
+      el.appShell.hidden = true;
+      el.sidebarToggle.hidden = true;
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    const mostrarDocumentos = vista === "todo" || vista === "documentos";
+    const mostrarDatos = vista === "todo" || vista === "datos";
+
+    el.menuInicio.hidden = true;
+    el.volverBar.hidden = false;
+    el.appShell.hidden = false;
+
+    // Panel lateral (resumen + búsqueda + lista de documentos)
+    el.sidebar.hidden = !mostrarDocumentos;
+    el.sidebarResizer.hidden = !mostrarDocumentos;
+    el.sidebarToggle.hidden = !mostrarDocumentos;
+    el.appShell.classList.toggle("vista-sin-sidebar", !mostrarDocumentos);
+    if (!mostrarDocumentos) el.appShell.classList.remove("sidebar-visible-movil");
+
+    // Visualizador de documentos
+    el.seccionVisualizador.hidden = !mostrarDocumentos;
+
+    // Datos del becario, responsables y carnet
+    el.seccionDatosBecario.hidden = !mostrarDatos;
+    el.seccionResponsables.hidden = !mostrarDatos;
+    el.seccionCarnet.hidden = !mostrarDatos;
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  /* -----------------------------------------------------------
      Vinculación de eventos
      ----------------------------------------------------------- */
   function vincularEventos() {
@@ -1911,6 +2088,11 @@ const documentos = [
       }
     });
 
+    el.menuBotones.forEach((boton) => {
+      boton.addEventListener("click", () => mostrarVista(boton.dataset.vista));
+    });
+    el.btnVolverMenu.addEventListener("click", () => mostrarVista("menu"));
+
     el.modalCerrar.addEventListener("click", cerrarModalImagen);
     el.modal.addEventListener("click", (e) => {
       if (e.target === el.modal) cerrarModalImagen();
@@ -1950,6 +2132,7 @@ const documentos = [
     renderizarListaDocumentos();
     mostrarDocumentoActual();
     vincularEventos();
+    mostrarVista("menu");
   }
 
   document.addEventListener("DOMContentLoaded", iniciar);
